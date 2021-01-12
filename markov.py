@@ -11,8 +11,9 @@ def open_and_read_file(file_path):
     """
 
     # your code goes here
+    file_text = open(file_path).read()
 
-    return 'Contents of your file as one long string'
+    return file_text
 
 
 def make_chains(text_string):
@@ -43,6 +44,20 @@ def make_chains(text_string):
     chains = {}
 
     # your code goes here
+    # split file text into individual words 
+    words = text_string.split()
+    # loop by index through every 2 word pairs in word list (ending is length of word list - 2)
+    for i in range(len(words) - 2):
+        key = (words[i], words[i+1])
+        value = words[i+2]
+        
+        if key not in chains:
+            chains[key] = []
+        
+        chains[key].append(value)
+        # create tuple of 2 word pair
+        # add tuple to dictionary as key
+        # based on tuple just added, update value to list for that tuple
 
     return chains
 
@@ -64,8 +79,9 @@ input_text = open_and_read_file(input_path)
 
 # Get a Markov chain
 chains = make_chains(input_text)
+print(chains)
 
 # Produce random text
-random_text = make_text(chains)
+# random_text = make_text(chains)
 
-print(random_text)
+# print(random_text)
