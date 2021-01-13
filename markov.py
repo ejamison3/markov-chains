@@ -64,10 +64,23 @@ def make_chains(text_string):
 
 def make_text(chains):
     """Return text from chains."""
+    #grab a random tuple
+    all_keys = list(chains.keys())
+    curr_key = choice(all_keys)
+    # initialize words list and populate with first tuple 
+    words = [curr_key[0], curr_key[1]]
 
-    words = []
+    # this will stop when we get a two word combo that is not a key
+    while curr_key in chains:
+        #choose random word from values for curr_key
+        curr_word_options = chains[curr_key]
+        curr_word = choice(curr_word_options)
 
-    # your code goes here
+        #add word to words_list
+        words.append(curr_word)
+
+        #create new tuple and go back
+        curr_key = (curr_key[1], curr_word)
 
     return ' '.join(words)
 
@@ -79,9 +92,8 @@ input_text = open_and_read_file(input_path)
 
 # Get a Markov chain
 chains = make_chains(input_text)
-print(chains)
 
 # Produce random text
-# random_text = make_text(chains)
+random_text = make_text(chains)
 
-# print(random_text)
+print(random_text)
