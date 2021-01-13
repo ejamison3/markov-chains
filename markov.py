@@ -1,7 +1,7 @@
 """Generate Markov text from text files."""
 
+import sys
 from random import choice
-
 
 def open_and_read_file(file_path):
     """Take file path as string; return text as string.
@@ -84,8 +84,10 @@ def make_text(chains):
 
     return ' '.join(words)
 
+# if user gives different file name when running program, use that
+input_path = 'green-eggs.txt' if len(sys.argv) == 1 else sys.argv[1]
 
-input_path = 'green-eggs.txt'
+print(input_path)
 
 # Open the file and turn it into one long string
 input_text = open_and_read_file(input_path)
